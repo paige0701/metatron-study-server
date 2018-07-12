@@ -1,0 +1,62 @@
+spring:
+  profiles:
+    active: source
+  jmx:
+    enabled: false
+  # DB
+  datasource:
+    initial: true
+    driverClassName: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/test?autoReconnect=true&useUnicode=true&characterEncoding=UTF-8&useSSL=false
+    username: root
+    password: root
+    test-while-idle: true
+    test-on-borrow: true
+    validation-query: SELECT 1
+  # JPA
+  jpa:
+    database: mysql
+    show-sql: false
+    hibernate:
+      naming.physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+      ddl-auto: update
+    properties:
+      hibernate:
+        hbm2ddl:
+          auto: update
+          import_files: /sql/init.sql
+        c3p0:
+          timeout: 1800
+          idle_test_period: 100
+
+# Security 설정 (Config에 Adapter를 선언하면 아래의 설정들은 동작하지 않는다.)
+#security:
+#  user:
+#    name: admin
+#    password: admin
+#  oauth2:
+#    client:
+#      client-id: study-oauth
+#      client-secret: study-oauth-secret
+#    # API 서버에서 토큰을 체크할 수 있도록 설정
+#    authorization:
+#      check-token-access: isAuthenticated()
+
+## LOG 설정
+#logging:
+#  config: classpath:logback-console.xml
+#
+## WAS 설정
+#server:
+#  port: 10000
+#  display-name: study-oauth
+#  session:
+#    timeout: 3600
+#
+## 스터디 설정
+#study:
+#  # ElasticCache(Redis) 설정
+#  cache:
+#    url: localhost
+#    port: 6379
+#    password:
