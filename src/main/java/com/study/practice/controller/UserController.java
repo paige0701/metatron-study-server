@@ -17,8 +17,10 @@ public class UserController {
     UserRepository userRepository;
 
     @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userRepository.findAll();
+    public ResponseEntity<?> getAllUsers() {
+        System.out.println("Print users");
+        List<User> users = userRepository.findAll();
+        return ResponseEntity.ok().body(users);
     }
 
     @PostMapping("/users")
